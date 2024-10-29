@@ -1,32 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Viewer</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- AR.js library for AR functionality -->
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.2/aframe/build/aframe-ar.js"></script>
-</head>
-<body>
-    <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
-        <!-- This is the custom marker that will trigger the AR experience -->
-        <a-marker preset="custom" type="pattern" url="assets/my-marker.patt">
-            <!-- 3D model that appears when the marker is detected -->
-            <a-entity id="myModel" position="0 0 0" scale="0.5 0.5 0.5" gltf-model="#modelAsset" rotation="0 180 0">
-            </a-entity>
-        </a-marker>
-    
-        <!-- 3D model asset definition -->
-        <a-assets>
-            <a-asset-item id="modelAsset" src="assets/myModel.gltf"></a-asset-item>
-        </a-assets>
-    
-        <!-- The camera in the AR scene -->
-        <a-entity camera></a-entity>
-    </a-scene>
+    <title>AR Model Viewer</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Model Viewer with AR">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="./styles.css" rel="stylesheet" />
 
-    <script src="app.js"></script>
+    <!-- Import the model-viewer library -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head>
+
+<body>
+    <!-- Single <model-viewer> element for both Android and iOS -->
+    <model-viewer src="https://yourdomain.com/path/to/maldon-salt-2.glb" 
+                  ios-src="https://yourdomain.com/path/to/maldon-salt-2.usdz" 
+                  ar ar-modes="webxr scene-viewer quick-look" 
+                  ar-scale="fixed" 
+                  camera-controls 
+                  touch-action="pan-y" 
+                  alt="A 3D model of Maldon Salt" 
+                  shadow-intensity="2" 
+                  max-camera-orbit="auto 90deg auto">
+        <button slot="ar-button" id="ar-button">View in your space</button>
+        <div id="ar-prompt">
+            <img src="ar_hand_prompt.png" alt="AR hand prompt">
+        </div>
+    </model-viewer>
+
+    <!-- QR Code -->
+    <div class="QR">
+        <img src="frame (1).png" alt="Scan this QR code to view in AR" width="200px" height="200px">
+    </div>
 </body>
 </html>
